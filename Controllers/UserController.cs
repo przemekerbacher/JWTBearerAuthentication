@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using JWTAutentication.Models;
+using JWTAuthentication.Models;
 using System.Threading.Tasks;
 
-namespace JWTAutentication.Controllers
+namespace JWTAuthentication.Controllers
 {
     public class UserController
         : Controller
@@ -72,5 +72,11 @@ namespace JWTAutentication.Controllers
             }
             return StatusCode(406);
         }
+
+        //[HttpPost("ConfirmEmail")]
+        //public IActionResult ConfirmEmail(string confirmToken)
+        //{
+
+        //}
     }
 }

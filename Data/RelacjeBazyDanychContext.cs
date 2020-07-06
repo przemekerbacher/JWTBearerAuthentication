@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using JWTAutentication.Models;
+using JWTAuthentication.Models;
 
-namespace JWTAutentication.Data
+namespace JWTAuthentication.Data
 {
     public class RelacjeBazyDanychContext : IdentityDbContext
     {

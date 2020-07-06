@@ -1,5 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using JWTAutentication.Models;
+using JWTAuthentication.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace JWTAutentication.Helpers
+namespace JWTAuthentication.Helpers
 {
     public class TokenManager : ITokenManager
     {

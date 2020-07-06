@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace JWTAutentication.Models
+namespace JWTAuthentication.Models
 {
     public class User : IdentityUser
     {

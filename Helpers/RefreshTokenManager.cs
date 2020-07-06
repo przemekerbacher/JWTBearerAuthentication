@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using JWTAutentication.Models;
+using JWTAuthentication.Models;
 
-namespace JWTAutentication.Helpers
+namespace JWTAuthentication.Helpers
 {
     public class RefreshTokenManager<T> : IRefreshTokenManager<T> where T : class
     {

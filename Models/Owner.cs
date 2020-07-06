@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace JWTAutentication.Models
+namespace JWTAuthentication.Models
 {
     public class Owner
     {

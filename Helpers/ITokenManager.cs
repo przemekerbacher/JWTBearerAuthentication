@@ -1,6 +1,6 @@
-﻿using JWTAutentication.Models;
+﻿using JWTAuthentication.Models;
 
-namespace JWTAutentication.Helpers
+namespace JWTAuthentication.Helpers
 {
     public interface ITokenManager
     {

@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using JWTAuthentication.Data;
+using JWTAuthentication.Helpers;
+using JWTAuthentication.Models;
+using JWTAuthentication.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,12 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using JWTAutentication.Data;
-using JWTAutentication.Helpers;
-using JWTAutentication.Models;
 using System.Text;
+using System.Net.Mail;
+using System.Net;
 
-namespace JWTAutentication
+namespace JWTAuthentication
 {
     public class Startup
     {
@@ -29,13 +32,25 @@ namespace JWTAutentication
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.JWT_Secret);
+
+            var smtpSection = Configuration.GetSection("SMTP");
+            services.Configure<SMTP>(smtpSection);
+            var smtp = smtpSection.Get<SMTP>();
+
+            SmtpClient smtpClient = new SmtpClient(smtp.Host);
+            smtpClient.Port = smtp.PortSSL;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = new NetworkCredential(smtp.Username, smtp.Password);
+            
 
             services.AddSingleton(appSettings);
+            services.AddSingleton(smtp);
+            services.AddSingleton(smtpClient);
 
             services.AddSingleton<ITokenManager, TokenManager>();
             services.AddSingleton<IRefreshTokenManager<RefreshTokenClaims>, RefreshTokenManager<RefreshTokenClaims>>();
-
+            services.AddTransient<IMailSender, MailSender>();
             services.AddDbContext<RelacjeBazyDanychContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("RelacjeBazyDanychContext")));
 
@@ -50,26 +65,40 @@ namespace JWTAutentication
                         RequireNonAlphanumeric = false,
                         RequiredUniqueChars = 0
                     };
+
+                    x.SignIn = new SignInOptions
+                    {
+                        RequireConfirmedEmail = true
+                    };
                 }
                 ).AddEntityFrameworkStores<RelacjeBazyDanychContext>();
+
+
+            var key = Encoding.ASCII.GetBytes(appSettings.JWT_Secret);
 
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-        {
-            x.RequireHttpsMetadata = false;
-            x.SaveToken = true;
-            x.TokenValidationParameters = new TokenValidationParameters
+            })
+            .AddJwtBearer(x =>
             {
-                ValidateIssuerSigningKey = true,
-                ValidateLifetime = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-            };
-        });
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                };
+            })
+            .AddGoogle(options =>
+                {
+                    options.ClientId = appSettings.Google_Authentication_Id;
+                    options.ClientSecret = appSettings.Google_Authentication_Secret;
+                }); ;
 
             services.AddAuthorization();
 

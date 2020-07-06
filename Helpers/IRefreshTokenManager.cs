@@ -1,4 +1,4 @@
-﻿namespace JWTAutentication.Helpers
+﻿namespace JWTAuthentication.Helpers
 {
     public interface IRefreshTokenManager<T> where T : class
     {

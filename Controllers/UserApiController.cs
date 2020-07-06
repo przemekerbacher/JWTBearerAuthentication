@@ -2,15 +2,16 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using JWTAutentication.Data;
-using JWTAutentication.Helpers;
-using JWTAutentication.Models;
+using JWTAuthentication.Data;
+using JWTAuthentication.Helpers;
+using JWTAuthentication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JWTAuthentication.Helpers;
 
-namespace JWTAutentication.Controllers
+namespace JWTAuthentication.Controllers
 {
     [Route("api/User")]
     [ApiController]
@@ -22,6 +23,7 @@ namespace JWTAutentication.Controllers
         private AppSettings _appSettings;
         private ITokenManager _tokenManager;
         private IRefreshTokenManager<RefreshTokenClaims> _refreshTokenManager;
+        private IMailSender _mailSender;
 
         public UserApiController(
             UserManager<User> userManager,
@@ -29,7 +31,8 @@ namespace JWTAutentication.Controllers
             RelacjeBazyDanychContext context,
             AppSettings appSettings,
             ITokenManager tokenManager,
-            IRefreshTokenManager<RefreshTokenClaims> refreshTokenManager)
+            IRefreshTokenManager<RefreshTokenClaims> refreshTokenManager,
+            IMailSender mailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -37,6 +40,7 @@ namespace JWTAutentication.Controllers
             _context = context;
             _appSettings = appSettings;
             _refreshTokenManager = refreshTokenManager;
+            _mailSender = mailSender;
         }
 
         [HttpPost("register")]
@@ -64,6 +68,7 @@ namespace JWTAutentication.Controllers
         }
 
         [HttpGet("login")]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (ModelState.IsValid)
@@ -136,6 +141,20 @@ namespace JWTAutentication.Controllers
             };
 
             return Ok(tokenPair);
+        }
+
+        [HttpPost("sendmail")]
+        public IActionResult SendMail()
+        {
+            _mailSender.Send(new MailModel()
+            {
+                From = "przemyslaw.erbacher@gmail.com",
+                PlainTextContent = "test maila",
+                Subject = "test",
+                To = "pe@s4h.pl"
+            });
+
+            return Ok();
         }
 
         private TokenResponseModel CreateTokens(User user)

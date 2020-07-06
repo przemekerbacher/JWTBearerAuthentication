@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using JWTAutentication.Data;
+using JWTAuthentication.Data;
 
-namespace JWTAutentication.Migrations
+namespace JWTAuthentication.Migrations
 {
     [DbContext(typeof(RelacjeBazyDanychContext))]
     [Migration("20200702081853_change dbContext")]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\RelacjeBazyDanych\\JWTAuthentication.csproj": {}
+    "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\JWTAuthentication\\JWTAuthentication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\RelacjeBazyDanych\\JWTAuthentication.csproj": {
+    "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\JWTAuthentication\\JWTAuthentication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\RelacjeBazyDanych\\JWTAuthentication.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\JWTAuthentication\\JWTAuthentication.csproj",
         "projectName": "JWTAuthentication",
-        "projectPath": "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\RelacjeBazyDanych\\JWTAuthentication.csproj",
+        "projectPath": "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\JWTAuthentication\\JWTAuthentication.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\RelacjeBazyDanych\\obj\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\RelacjeBazyDanych\\JWTAuthentication\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -45,6 +45,10 @@
               "target": "Package",
               "version": "[7.2.1, )"
             },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.5, )"
@@ -74,6 +78,14 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.7.1, )"
+            },
+            "mailkit": {
+              "target": "Package",
+              "version": "[2.7.0, )"
+            },
+            "sendgrid": {
+              "target": "Package",
+              "version": "[9.17.0, )"
             }
           },
           "imports": [

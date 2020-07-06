@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using JWTAutentication.Models;
+using JWTAuthentication.Models;
 using System.Diagnostics;
 
-namespace JWTAutentication.Controllers
+namespace JWTAuthentication.Controllers
 {
     public class HomeController : Controller
     {

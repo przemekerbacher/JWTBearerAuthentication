@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JWTAutentication.Models
+namespace JWTAuthentication.Models
 {
     public class RefreshToken
     {

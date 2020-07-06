@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace JWTAutentication
+namespace JWTAuthentication
 {
     public class Program
     {

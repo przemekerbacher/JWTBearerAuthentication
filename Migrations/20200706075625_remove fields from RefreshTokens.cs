@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace JWTAutentication.Migrations
+namespace JWTAuthentication.Migrations
 {
     public partial class removefieldsfromRefreshTokens : Migration
     {

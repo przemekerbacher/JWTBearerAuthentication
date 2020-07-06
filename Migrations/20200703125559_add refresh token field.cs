@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace JWTAutentication.Migrations
+namespace JWTAuthentication.Migrations
 {
     public partial class addrefreshtokenfield : Migration
     {
